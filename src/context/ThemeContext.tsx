@@ -19,7 +19,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         setMounted(true);
         // Check localStorage for saved preference
         const saved = localStorage.getItem('jxn-theme') as Theme;
-        if (saved) {
+        if (saved && (saved === 'dark' || saved === 'light')) {
             setTheme(saved);
             document.documentElement.setAttribute('data-theme', saved);
         }
@@ -32,14 +32,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         document.documentElement.setAttribute('data-theme', newTheme);
     };
 
-    // Prevent flash of wrong theme
-    if (!mounted) {
-        return <>{children}</>;
-    }
+    // Always provide context
+    const value = { theme, toggleTheme };
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            {children}
+        <ThemeContext.Provider value={value}>
+            {mounted ? children : children}
         </ThemeContext.Provider>
     );
 }

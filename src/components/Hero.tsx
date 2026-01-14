@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Magnetic from '@/components/ui/Magnetic';
+import { useLanguage } from '@/context/LanguageContext';
 
 const kpis = [
     { value: '3.2x', label: 'ROAS' },
@@ -49,6 +50,7 @@ const itemVariants = {
 };
 
 export default function Hero() {
+    const { t } = useLanguage();
     const sectionRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -113,7 +115,7 @@ export default function Hero() {
                             transition={{ duration: 0.3 }}
                         >
                             <span className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
-                            Full-Funnel Growth • Meta Ads + SEO
+                            {t('hero.badge')}
                         </motion.span>
                     </motion.div>
 
@@ -137,7 +139,7 @@ export default function Hero() {
                         variants={itemVariants}
                         className="mt-6 text-xl text-[var(--text-secondary)] leading-relaxed max-w-lg"
                     >
-                        I scale growth with performance Meta ads + compounding SEO — built for measurable revenue.
+                        {t('hero.tagline')}
                     </motion.p>
 
                     {/* CTAs */}
@@ -150,7 +152,7 @@ export default function Hero() {
                                 whileTap={{ scale: 0.98 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                View Case Studies
+                                {t('hero.cta1')}
                             </motion.a>
                         </Magnetic>
                         <Magnetic>
@@ -161,7 +163,7 @@ export default function Hero() {
                                 whileTap={{ scale: 0.98 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                Contact
+                                {t('hero.cta2')}
                             </motion.a>
                         </Magnetic>
                     </motion.div>

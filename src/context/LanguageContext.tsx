@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 
 type Language = 'en' | 'sw';
 
@@ -159,29 +159,26 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
     const [language, setLanguage] = useState<Language>('en');
-    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
         const saved = localStorage.getItem('jxn-lang') as Language;
-        if (saved) {
+        if (saved && (saved === 'en' || saved === 'sw')) {
             setLanguage(saved);
         }
     }, []);
 
     const toggleLanguage = () => {
-        const newLang = language === 'en' ? 'sw' : 'en';
-        setLanguage(newLang);
-        localStorage.setItem('jxn-lang', newLang);
+        setLanguage((prev) => {
+            const newLang = prev === 'en' ? 'sw' : 'en';
+            localStorage.setItem('jxn-lang', newLang);
+            return newLang;
+        });
     };
 
-    const t = (key: string): string => {
+    // The t function must reference the current language directly
+    const t = useCallback((key: string): string => {
         return translations[language][key] || key;
-    };
-
-    if (!mounted) {
-        return <>{children}</>;
-    }
+    }, [language]);
 
     return (
         <LanguageContext.Provider value={{ language, toggleLanguage, t }}>

@@ -3,19 +3,21 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-
-const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Process', href: '#process' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Contact', href: '#contact' },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Navbar() {
+    const { t } = useLanguage();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const navLinks = [
+        { name: t('nav.about'), href: '#about' },
+        { name: t('nav.services'), href: '#services' },
+        { name: t('nav.process'), href: '#process' },
+        { name: t('nav.projects'), href: '#projects' },
+        { name: t('nav.blog'), href: '#blog' },
+        { name: t('nav.contact'), href: '#contact' },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -123,7 +125,7 @@ export default function Navbar() {
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                         >
-                            Book a Call
+                            {t('nav.cta')}
                         </motion.a>
 
                         {/* Hamburger Menu Button */}
@@ -211,7 +213,7 @@ export default function Navbar() {
                                     text-[var(--bg-dark)]
                                 "
                             >
-                                Book a Growth Call
+                                {t('nav.cta')}
                             </motion.a>
                         </motion.div>
                     )}
