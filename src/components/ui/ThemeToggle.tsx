@@ -13,7 +13,7 @@ export default function ThemeToggle() {
                 fixed top-28 right-6 z-50
                 w-12 h-12 rounded-full
                 bg-[var(--bg-card)] border border-[var(--border-glass)]
-                flex items-center justify-center
+                hidden md:flex items-center justify-center
                 text-[var(--gold)] hover:text-white
                 hover:border-[var(--gold)]/50 hover:bg-[var(--gold)]/10
                 shadow-lg shadow-black/20
