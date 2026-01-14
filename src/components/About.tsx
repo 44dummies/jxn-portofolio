@@ -1,7 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 const skills = [
     'Meta Ads',
@@ -15,11 +16,21 @@ const skills = [
 ];
 
 export default function About() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    });
+
+    // Parallax effect for image
+    const imageY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+    const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
+
     return (
-        <section id="about" className="relative py-24 md:py-32">
+        <section ref={sectionRef} id="about" className="relative py-24 md:py-32">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    {/* Left: Image */}
+                    {/* Left: Image with Parallax */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -27,7 +38,10 @@ export default function About() {
                         transition={{ duration: 0.8 }}
                         className="relative"
                     >
-                        <div className="relative aspect-[4/5] rounded-3xl overflow-hidden glass-card">
+                        <motion.div
+                            className="relative aspect-[4/5] rounded-3xl overflow-hidden glass-card"
+                            style={{ y: imageY, scale: imageScale }}
+                        >
                             <Image
                                 src="/jackson-creative.jpg"
                                 alt="Jackson Ndeti"
@@ -37,7 +51,7 @@ export default function About() {
                             />
                             {/* Overlay accent */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/60 via-transparent to-transparent" />
-                        </div>
+                        </motion.div>
 
                         {/* Floating stats card */}
                         <motion.div
@@ -81,7 +95,7 @@ export default function About() {
                             </p>
                             <p>
                                 Today, I help businesses across Africa and beyond scale with
-                                <strong className="text-white"> Meta Ads, SEO, and conversion-optimized funnels</strong>.
+                                <strong className="text-[var(--text-primary)]"> Meta Ads, SEO, and conversion-optimized funnels</strong>.
                                 My approach is simple: understand the customer, craft the message, measure everything.
                             </p>
                         </div>

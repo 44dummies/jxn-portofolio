@@ -1,11 +1,21 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef } from 'react';
 import NextImage from 'next/image';
 import Magnetic from '@/components/ui/Magnetic';
 
 export default function Contact() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    });
+
+    // Parallax effect for image
+    const imageY = useTransform(scrollYProgress, [0, 1], ['15%', '-15%']);
+    const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.02, 0.98]);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -31,10 +41,10 @@ export default function Contact() {
   `;
 
     return (
-        <section id="contact" className="section-padding">
+        <section ref={sectionRef} id="contact" className="section-padding">
             <div className="max-w-6xl mx-auto">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Left Column: Creative Image */}
+                    {/* Left Column: Creative Image with Parallax */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -42,7 +52,10 @@ export default function Contact() {
                         transition={{ duration: 0.7 }}
                         className="relative hidden md:block"
                     >
-                        <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden glass-card border-[var(--border-glass)]">
+                        <motion.div
+                            className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden glass-card border-[var(--border-glass)]"
+                            style={{ y: imageY, scale: imageScale }}
+                        >
                             <NextImage
                                 src="/jackson-creative.jpg"
                                 alt="Jackson Ndeti Creative"
@@ -60,7 +73,7 @@ export default function Contact() {
                                     <span className="text-gradient-gold">revenue engine?</span>
                                 </h3>
                             </div>
-                        </div>
+                        </motion.div>
                     </motion.div>
 
                     {/* Right Column: Form */}
@@ -182,13 +195,13 @@ export default function Contact() {
                         >
                             <div className="p-4 rounded-2xl glass-card border-[var(--border-glass)]">
                                 <p className="text-xs text-[var(--gold)] uppercase tracking-wider mb-1">Email</p>
-                                <a href="mailto:lucentiquedigital21@gmail.com" className="text-xs md:text-sm text-[var(--text-secondary)] hover:text-white block truncate">
+                                <a href="mailto:lucentiquedigital21@gmail.com" className="text-xs md:text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] block truncate transition-colors">
                                     lucentiquedigital21...
                                 </a>
                             </div>
                             <div className="p-4 rounded-2xl glass-card border-[var(--border-glass)]">
                                 <p className="text-xs text-[var(--gold)] uppercase tracking-wider mb-1">Phone</p>
-                                <a href="tel:0706577769" className="text-xs md:text-sm text-[var(--text-secondary)] hover:text-white block">
+                                <a href="tel:0706577769" className="text-xs md:text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] block transition-colors">
                                     0706 577 769
                                 </a>
                             </div>

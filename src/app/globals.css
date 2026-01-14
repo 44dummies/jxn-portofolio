@@ -6,7 +6,7 @@
   --gold-light: #E0C98A;
   --gold-dark: #A68B4B;
 
-  /* Dark backgrounds */
+  /* Dark backgrounds (default) */
   --bg-dark: #0A0A0B;
   --bg-card: #111113;
   --bg-elevated: #161618;
@@ -19,6 +19,29 @@
   /* Text colors */
   --text-primary: #FAFAFA;
   --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+}
+
+/* Light mode */
+[data-theme="light"] {
+  /* Adjusted gold for contrast */
+  --gold: #A68B4B;
+  --gold-light: #C9A962;
+  --gold-dark: #8B7340;
+
+  /* Light backgrounds */
+  --bg-dark: #FAFAFA;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F4F4F5;
+
+  /* Glass effects for light */
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --border-glass-hover: rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+
+  /* Text colors */
+  --text-primary: #0A0A0B;
+  --text-secondary: #52525B;
   --text-muted: #71717A;
 }
 

@@ -5,6 +5,10 @@ import ScrollDrivenCharacter from "@/components/ui/ScrollDrivenCharacter";
 import CustomCursor from "@/components/ui/CustomCursor";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import BackToTop from "@/components/ui/BackToTop";
+import ThemeToggle from "@/components/ui/ThemeToggle";
+import LanguageToggle from "@/components/ui/LanguageToggle";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,19 +44,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased relative`}>
-        {/* Global Cinematic Background */}
-        <ScrollDrivenCharacter />
-        <CustomCursor />
+      <body className={`${inter.variable} font-sans antialiased relative bg-[var(--bg-dark)]`}>
+        <ThemeProvider>
+          <LanguageProvider>
+            {/* Global Cinematic Background */}
+            <ScrollDrivenCharacter />
+            <CustomCursor />
 
-        {children}
+            {children}
 
-        {/* Floating Buttons */}
-        <BackToTop />
-        <WhatsAppButton />
+            {/* Floating Buttons */}
+            <ThemeToggle />
+            <LanguageToggle />
+            <BackToTop />
+            <WhatsAppButton />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
 
 
