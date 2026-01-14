@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ScrollDrivenCharacter from "@/components/ui/ScrollDrivenCharacter";
 import CustomCursor from "@/components/ui/CustomCursor";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,14 +16,14 @@ export const metadata: Metadata = {
   keywords: ["Growth Marketing", "Meta Ads", "SEO", "Performance Marketing", "Digital Marketing", "Kenya", "Nairobi"],
   authors: [{ name: "Jackson Ndeti" }],
   icons: {
-    icon: "/logo.jpg",
-    apple: "/logo.jpg",
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
   openGraph: {
     title: "Jackson Ndeti | Full-Funnel Growth Marketer",
     description: "I scale growth with performance Meta ads + compounding SEO — built for measurable revenue.",
     type: "website",
-    images: ["/logo.jpg"],
+    images: ["/favicon.png"],
   },
   twitter: {
     card: "summary_large_image",
@@ -44,7 +45,11 @@ export default function RootLayout({
         <CustomCursor />
 
         {children}
+
+        {/* Floating WhatsApp Button */}
+        <WhatsAppButton />
       </body>
     </html>
   );
 }
+
