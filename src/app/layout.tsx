@@ -4,6 +4,7 @@ import "./globals.css";
 import ScrollDrivenCharacter from "@/components/ui/ScrollDrivenCharacter";
 import CustomCursor from "@/components/ui/CustomCursor";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import BackToTop from "@/components/ui/BackToTop";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,10 +47,12 @@ export default function RootLayout({
 
         {children}
 
-        {/* Floating WhatsApp Button */}
+        {/* Floating Buttons */}
+        <BackToTop />
         <WhatsAppButton />
       </body>
     </html>
   );
 }
+
 

@@ -1,18 +1,21 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
 const navLinks = [
+    { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
+    { name: 'Process', href: '#process' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,72 +25,198 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Close mobile menu on resize
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setMobileMenuOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Smooth scroll handler with offset
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const targetId = href.replace('#', '');
+        const element = document.getElementById(targetId);
+        if (element) {
+            const offset = 100; // Navbar height + padding
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+        setMobileMenuOpen(false);
+    };
+
     return (
-        <motion.header
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" as const }}
-            className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
-        >
-            <nav
-                className={`
-                    flex items-center gap-3 px-3 py-2 rounded-full
-                    border transition-all duration-500
-                    ${scrolled
-                        ? 'bg-[var(--bg-card)]/95 backdrop-blur-xl border-[var(--border-glass-hover)] shadow-lg shadow-black/20'
-                        : 'bg-[var(--glass-bg)] backdrop-blur-md border-[var(--border-glass)]'
-                    }
-                `}
+        <>
+            <motion.header
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" as const }}
+                className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl"
             >
-                {/* Logo */}
-                <motion.a
-                    href="#"
-                    className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
+                <nav
+                    className={`
+                        flex items-center justify-between px-4 py-3 rounded-full
+                        border transition-all duration-500
+                        ${scrolled
+                            ? 'bg-[var(--bg-card)]/95 backdrop-blur-xl border-[var(--border-glass-hover)] shadow-lg shadow-black/20'
+                            : 'bg-[var(--glass-bg)] backdrop-blur-md border-[var(--border-glass)]'
+                        }
+                    `}
                 >
-                    <Image
-                        src="/logo.jpg"
-                        alt="Jackson Ndeti Logo"
-                        fill
-                        className="object-cover"
-                        sizes="40px"
-                    />
-                </motion.a>
+                    {/* Logo */}
+                    <motion.a
+                        href="#"
+                        className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Image
+                            src="/logo.jpg"
+                            alt="Jackson Ndeti Logo"
+                            fill
+                            className="object-cover"
+                            sizes="40px"
+                        />
+                    </motion.a>
 
-                <ul className="flex items-center gap-1">
-                    {navLinks.map((link) => (
-                        <li key={link.name}>
-                            <motion.a
-                                href={link.href}
-                                className="
-                                    px-4 py-2 rounded-full text-sm font-medium
-                                    text-[var(--text-secondary)] hover:text-[var(--text-primary)]
-                                    hover:bg-white/5 transition-all duration-300
-                                "
-                                whileHover={{ y: -2 }}
-                                whileTap={{ scale: 0.95 }}
+                    {/* Desktop Navigation */}
+                    <ul className="hidden md:flex items-center gap-1">
+                        {navLinks.map((link) => (
+                            <li key={link.name}>
+                                <motion.a
+                                    href={link.href}
+                                    onClick={(e) => handleNavClick(e, link.href)}
+                                    className="
+                                        px-3 py-2 rounded-full text-sm font-medium
+                                        text-[var(--text-secondary)] hover:text-[var(--text-primary)]
+                                        hover:bg-white/5 transition-all duration-300
+                                    "
+                                    whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    {link.name}
+                                </motion.a>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* CTA + Mobile Menu Button */}
+                    <div className="flex items-center gap-2">
+                        <motion.a
+                            href="#contact"
+                            onClick={(e) => handleNavClick(e, '#contact')}
+                            className="
+                                hidden sm:block px-4 py-2 rounded-full text-sm font-semibold
+                                bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)]
+                                text-[var(--bg-dark)] hover:shadow-lg hover:shadow-[var(--gold)]/20
+                                transition-all duration-300
+                            "
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Book a Call
+                        </motion.a>
+
+                        {/* Hamburger Menu Button */}
+                        <button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            className="md:hidden p-2 rounded-full hover:bg-white/5 transition-colors"
+                            aria-label="Toggle menu"
+                        >
+                            <motion.div
+                                animate={mobileMenuOpen ? "open" : "closed"}
+                                className="w-6 h-5 flex flex-col justify-between"
                             >
-                                {link.name}
-                            </motion.a>
-                        </li>
-                    ))}
-                </ul>
+                                <motion.span
+                                    variants={{
+                                        closed: { rotate: 0, y: 0 },
+                                        open: { rotate: 45, y: 8 }
+                                    }}
+                                    className="w-full h-0.5 bg-[var(--text-primary)] origin-left"
+                                />
+                                <motion.span
+                                    variants={{
+                                        closed: { opacity: 1 },
+                                        open: { opacity: 0 }
+                                    }}
+                                    className="w-full h-0.5 bg-[var(--text-primary)]"
+                                />
+                                <motion.span
+                                    variants={{
+                                        closed: { rotate: 0, y: 0 },
+                                        open: { rotate: -45, y: -8 }
+                                    }}
+                                    className="w-full h-0.5 bg-[var(--text-primary)] origin-left"
+                                />
+                            </motion.div>
+                        </button>
+                    </div>
+                </nav>
 
-                <motion.a
-                    href="#contact"
-                    className="
-                        ml-2 px-5 py-2 rounded-full text-sm font-semibold
-                        bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)]
-                        text-[var(--bg-dark)] hover:shadow-lg hover:shadow-[var(--gold)]/20
-                        transition-all duration-300
-                    "
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                >
-                    Book a Growth Call
-                </motion.a>
-            </nav>
-        </motion.header>
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {mobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                            className="
+                                mt-2 p-4 rounded-3xl
+                                bg-[var(--bg-card)]/95 backdrop-blur-xl
+                                border border-[var(--border-glass)]
+                                shadow-2xl shadow-black/30
+                            "
+                        >
+                            <ul className="flex flex-col gap-1">
+                                {navLinks.map((link, index) => (
+                                    <motion.li
+                                        key={link.name}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.05 }}
+                                    >
+                                        <a
+                                            href={link.href}
+                                            onClick={(e) => handleNavClick(e, link.href)}
+                                            className="
+                                                block px-4 py-3 rounded-xl text-base font-medium
+                                                text-[var(--text-secondary)] hover:text-[var(--text-primary)]
+                                                hover:bg-white/5 transition-all duration-300
+                                            "
+                                        >
+                                            {link.name}
+                                        </a>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                            <motion.a
+                                href="#contact"
+                                onClick={(e) => handleNavClick(e, '#contact')}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                                className="
+                                    mt-4 block w-full py-3 rounded-xl text-center font-semibold
+                                    bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)]
+                                    text-[var(--bg-dark)]
+                                "
+                            >
+                                Book a Growth Call
+                            </motion.a>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.header>
+        </>
     );
 }
