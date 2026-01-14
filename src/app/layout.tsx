@@ -16,14 +16,14 @@ export const metadata: Metadata = {
   keywords: ["Growth Marketing", "Meta Ads", "SEO", "Performance Marketing", "Digital Marketing", "Kenya", "Nairobi"],
   authors: [{ name: "Jackson Ndeti" }],
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
   },
   openGraph: {
     title: "Jackson Ndeti | Full-Funnel Growth Marketer",
     description: "I scale growth with performance Meta ads + compounding SEO — built for measurable revenue.",
     type: "website",
-    images: ["/favicon.png"],
+    images: ["/logo.jpg"],
   },
   twitter: {
     card: "summary_large_image",
