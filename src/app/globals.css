@@ -6,6 +6,11 @@
   --gold-light: #00b8e0;
   --gold-dark: #072d4f;
 
+  /* Secondary accent - Gold */
+  --secondary: #C9A962;
+  --secondary-light: #E0C98A;
+  --secondary-dark: #A68B4B;
+
   /* Dark backgrounds (default) */
   --bg-dark: #0A0A0B;
   --bg-card: #111113;
@@ -29,6 +34,11 @@
   --gold: #007a99;
   --gold-light: #0092b7;
   --gold-dark: #005a70;
+
+  /* Secondary accent - Gold (darker for light mode) */
+  --secondary: #A68B4B;
+  --secondary-light: #C9A962;
+  --secondary-dark: #8B7340;
 
   /* Light backgrounds */
   --bg-dark: #FAFAFA;
