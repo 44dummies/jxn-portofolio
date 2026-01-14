@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Gold accent */
-  --gold: #C9A962;
-  --gold-light: #E0C98A;
-  --gold-dark: #A68B4B;
+  /* Primary accent - Teal/Cyan */
+  --gold: #0092b7;
+  --gold-light: #00b8e0;
+  --gold-dark: #072d4f;
 
   /* Dark backgrounds (default) */
   --bg-dark: #0A0A0B;
   --bg-card: #111113;
   --bg-elevated: #161618;
+  --bg-overlay: rgba(21, 19, 19, 0.51);
 
   /* Glass effects */
   --border-glass: rgba(255, 255, 255, 0.08);
@@ -24,15 +25,16 @@
 
 /* Light mode */
 [data-theme="light"] {
-  /* Adjusted gold for contrast */
-  --gold: #A68B4B;
-  --gold-light: #C9A962;
-  --gold-dark: #8B7340;
+  /* Adjusted teal for contrast in light mode */
+  --gold: #007a99;
+  --gold-light: #0092b7;
+  --gold-dark: #005a70;
 
   /* Light backgrounds */
   --bg-dark: #FAFAFA;
   --bg-card: #FFFFFF;
   --bg-elevated: #F4F4F5;
+  --bg-overlay: rgba(21, 19, 19, 0.3);
 
   /* Glass effects for light */
   --border-glass: rgba(0, 0, 0, 0.08);
