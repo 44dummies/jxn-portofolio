@@ -54,7 +54,7 @@ export default function Contact() {
                             <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)]/80 via-transparent to-transparent" />
 
                             <div className="absolute bottom-8 left-8 right-8">
-                                <p className="text-[var(--gold)] font-medium mb-2">Let's build together</p>
+                                <p className="text-[var(--gold)] font-medium mb-2">Let&apos;s build together</p>
                                 <h3 className="text-3xl font-bold text-white leading-tight">
                                     Ready to scale your <br />
                                     <span className="text-gradient-gold">revenue engine?</span>
@@ -79,7 +79,7 @@ export default function Contact() {
                                 Start the <span className="text-gradient-gold">conversation</span>
                             </h2>
                             <p className="mt-4 text-[var(--text-secondary)] text-lg">
-                                Tell me your offer + current bottleneck — I'll reply with a plan.
+                                Tell me your offer + current bottleneck — I&apos;ll reply with a plan.
                             </p>
                         </motion.div>
 

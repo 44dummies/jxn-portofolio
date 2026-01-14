@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import Image from 'next/image';
 import Magnetic from '@/components/ui/Magnetic';
 
 const kpis = [
@@ -57,10 +56,7 @@ export default function Hero() {
     });
 
     // Parallax effects
-    const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-    const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
     const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
-    const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.7, 0.9]);
 
     return (
         <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">

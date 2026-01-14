@@ -127,7 +127,7 @@ export default function Services() {
                     viewport={{ once: true, margin: "-50px" }}
                     className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
-                    {services.map((service, index) => (
+                    {services.map((service) => (
                         <SpotlightCard
                             key={service.title}
                             variants={cardVariants}
