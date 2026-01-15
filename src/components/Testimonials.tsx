@@ -68,7 +68,7 @@ export default function Testimonials() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7 }}
-                    className="text-center mb-16"
+                    className="text-center mb-8 md:mb-16"
                 >
                     <span className="text-[var(--gold)] text-sm font-medium tracking-wider uppercase">
                         Testimonials
@@ -83,7 +83,7 @@ export default function Testimonials() {
                 </motion.div>
 
                 {/* Featured testimonials - floating */}
-                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
                     {featuredTestimonials.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.name}

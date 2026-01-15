@@ -158,10 +158,16 @@ body {
 
 /* Section spacing */
 .section-padding {
-  padding: 6rem 1.5rem;
+  padding: 3rem 1rem;
 }
 
 @media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .section-padding {
     padding: 8rem 2rem;
   }

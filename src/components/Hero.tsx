@@ -61,7 +61,7 @@ export default function Hero() {
     const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
     return (
-        <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+        <section ref={sectionRef} className="relative min-h-[85vh] md:min-h-screen flex items-center overflow-hidden pt-20 md:pt-0">
             {/* Background Image with Parallax - REMOVED (Now Global) */}
             {/* Keeping empty motion div for spacing if needed, but structure implies we can just remove content */}
 

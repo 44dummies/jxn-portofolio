@@ -50,15 +50,15 @@ const cardVariants = {
 
 export default function Blog() {
     return (
-        <section id="blog" className="relative py-24 md:py-32">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="blog" className="relative py-12 md:py-24 lg:py-32">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7 }}
-                    className="text-center mb-16"
+                    className="text-center mb-8 md:mb-16"
                 >
                     <span className="text-[var(--gold)] text-sm font-medium tracking-wider uppercase">
                         Insights
@@ -133,7 +133,7 @@ export default function Blog() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.3 }}
-                    className="mt-16 text-center"
+                    className="mt-10 md:mt-16 text-center"
                 >
                     <div className="glass-card p-8 md:p-12 rounded-3xl max-w-2xl mx-auto">
                         <h3 className="text-2xl font-bold text-white mb-3">

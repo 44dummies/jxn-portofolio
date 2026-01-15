@@ -71,15 +71,15 @@ const itemVariants = {
 
 export default function Process() {
     return (
-        <section id="process" className="relative py-24 md:py-32">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="process" className="relative py-12 md:py-24 lg:py-32">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.7 }}
-                    className="text-center mb-16"
+                    className="text-center mb-8 md:mb-16"
                 >
                     <span className="text-[var(--gold)] text-sm font-medium tracking-wider uppercase">
                         How I Work
@@ -111,7 +111,7 @@ export default function Process() {
                                 <div className="hidden lg:block absolute top-12 left-full w-full h-[2px] bg-gradient-to-r from-[var(--gold)]/30 to-transparent z-0" />
                             )}
 
-                            <div className="glass-card p-8 rounded-3xl h-full relative z-10 group-hover:border-[var(--gold)]/30 transition-colors duration-300">
+                            <div className="glass-card p-5 md:p-8 rounded-3xl h-full relative z-10 group-hover:border-[var(--gold)]/30 transition-colors duration-300">
                                 {/* Number badge */}
                                 <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-[var(--gold)] flex items-center justify-center text-[var(--bg-dark)] font-bold text-sm">
                                     {step.number}

@@ -29,9 +29,9 @@ export default function About() {
     const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
 
     return (
-        <section ref={sectionRef} id="about" className="relative py-24 md:py-32">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <section ref={sectionRef} id="about" className="relative py-12 md:py-24 lg:py-32">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                     {/* Left: Image with Parallax */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
