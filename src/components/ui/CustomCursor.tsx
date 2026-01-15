@@ -6,6 +6,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 export default function CustomCursor() {
     const [isHovered, setIsHovered] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
 
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -15,7 +16,18 @@ export default function CustomCursor() {
     const cursorX = useSpring(mouseX, springConfig);
     const cursorY = useSpring(mouseY, springConfig);
 
+    // Detect touch devices
     useEffect(() => {
+        const checkTouch = () => {
+            setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        };
+        checkTouch();
+    }, []);
+
+    useEffect(() => {
+        // Don't add listeners on touch devices
+        if (isTouchDevice) return;
+
         const moveCursor = (e: MouseEvent) => {
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
@@ -60,9 +72,10 @@ export default function CustomCursor() {
             cleanupListeners();
             observer.disconnect();
         };
-    }, [mouseX, mouseY, isVisible]);
+    }, [mouseX, mouseY, isVisible, isTouchDevice]);
 
-    if (!isVisible) return null;
+    // Don't render on touch devices
+    if (isTouchDevice || !isVisible) return null;
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">

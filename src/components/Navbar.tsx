@@ -15,9 +15,9 @@ export default function Navbar() {
     const navLinks = [
         { name: t('nav.about'), href: '#about' },
         { name: t('nav.services'), href: '#services' },
-        { name: t('nav.process'), href: '#process' },
+        { name: t('nav.process'), href: '#process', mobileHref: '/process' },
         { name: t('nav.projects'), href: '#projects' },
-        { name: t('nav.blog'), href: '#blog' },
+        { name: t('nav.blog'), href: '#blog', mobileHref: '/blog' },
         { name: t('nav.contact'), href: '#contact' },
     ];
 
@@ -189,17 +189,31 @@ export default function Navbar() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: index * 0.05 }}
                                     >
-                                        <a
-                                            href={link.href}
-                                            onClick={(e) => handleNavClick(e, link.href)}
-                                            className="
-                                                block px-4 py-3 rounded-xl text-base font-medium
-                                                text-[var(--text-secondary)] hover:text-[var(--text-primary)]
-                                                hover:bg-white/5 transition-all duration-300
-                                            "
-                                        >
-                                            {link.name}
-                                        </a>
+                                        {link.mobileHref ? (
+                                            <a
+                                                href={link.mobileHref}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="
+                                                    block px-4 py-3 rounded-xl text-base font-medium
+                                                    text-[var(--text-secondary)] hover:text-[var(--text-primary)]
+                                                    hover:bg-white/5 transition-all duration-300
+                                                "
+                                            >
+                                                {link.name} →
+                                            </a>
+                                        ) : (
+                                            <a
+                                                href={link.href}
+                                                onClick={(e) => handleNavClick(e, link.href)}
+                                                className="
+                                                    block px-4 py-3 rounded-xl text-base font-medium
+                                                    text-[var(--text-secondary)] hover:text-[var(--text-primary)]
+                                                    hover:bg-white/5 transition-all duration-300
+                                                "
+                                            >
+                                                {link.name}
+                                            </a>
+                                        )}
                                     </motion.li>
                                 ))}
                             </ul>
